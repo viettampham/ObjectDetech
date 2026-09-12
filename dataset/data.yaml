@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Carton']
+
+roboflow:
+  workspace: tam-pham-viet
+  project: carton-c6be5
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/tam-pham-viet/carton-c6be5/dataset/3
