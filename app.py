@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = YOLO("runs/detect/train-8/weights/best.pt")
+model = YOLO("runs/detect/train/weights/best.pt")
 
 UPLOAD_DIR = "uploads"
 RESULT_DIR = "results"

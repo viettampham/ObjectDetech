@@ -13,7 +13,7 @@ cache: false
 device: ''
 workers: 8
 project: null
-name: train
+name: train-10
 exist_ok: false
 pretrained: true
 cls_remap: true
@@ -112,4 +112,4 @@ auto_augment: randaugment
 erasing: 0.4
 cfg: null
 tracker: tracktrack.yaml
-save_dir: F:\ToolPython\carton-counter\runs\detect\train
+save_dir: G:\ToolPython\carton-counter\runs\detect\train-10
