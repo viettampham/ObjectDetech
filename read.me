@@ -1,1 +1,18 @@
+# tải tài nguyên khi mới kéo về từ git
 python -m pip install -r requirements.txt
+
+# Run trên local 
+python -m uvicorn app:app --host 0.0.0.0 --port 5000
+
+# Remove tài nguyên để run lại exe 
+rmdir build -Recurse -Force
+rmdir dist -Recurse -Force
+del *.spec
+
+# run lại exe
+pyinstaller --onedir --collect-all torch --collect-all torchvision --collect-all ultralytics --collect-all cv2 --add-data "best.pt;." server.py
+
+
+
+cd dist\server
+.\server.exe

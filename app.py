@@ -2,6 +2,8 @@ from fastapi import FastAPI, UploadFile, File, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
+import sys
+import os
 
 import shutil
 import uuid
@@ -12,13 +14,32 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=[
+        "http://localhost:4200",
+    ],
+    allow_origin_regex=r"https://.*\.trycloudflare\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-model = YOLO("runs/detect/train-2/weights/best.pt")
+def resource_path(relative_path):
+    if getattr(sys, "frozen", False):
+        return os.path.join(
+            os.path.dirname(sys.executable),
+            relative_path
+        )
+
+    return os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        relative_path
+    )
+
+MODEL_PATH = resource_path("best.pt")
+
+print("Model:", MODEL_PATH)
+
+model = YOLO(MODEL_PATH)
 
 UPLOAD_DIR = "uploads"
 RESULT_DIR = "results"
@@ -110,3 +131,4 @@ async def count_cartons(
         "count": count,
         "image_url": f"{request.base_url}results/{result_name}"
     }
+
